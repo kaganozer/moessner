@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moessner Teoremi</title>
+    <link rel="stylesheet" href="style.css">
+    <script nomodule defer src="https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.js"
+        integrity="sha384-nh31Q9trd3sQf+3sGN3WJvMdc9e2ZDTxwyReB2CsXJLidX/WnJRpy0c7pPdE8hYE"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.css"
+        integrity="sha384-SnvKCVpWlqAHp0BAPjxL1N8sfsapoYgnRfI5QefCb2uZ92hj01Q9rnHeiMsGJ+mT" crossorigin="anonymous">
+</head>
+
+<body>
+    <main>
+        <div id="inputBox">
+            <label id="sequenceLabel" for="sequenceInput">Sayı dizisini girin: </label>
+            <input id="sequenceInput" value="1 3 6 10 15">
+            <button id="submit">Hesapla</button>
+        </div>
+        <div id="specialCases"></div>
+        <div id="results">
+            <div class="array" id="sequence"></div>
+            <div class="array" id="result"></div>
+            <table id="arrayTable">
+                <tbody id="arrayTableBody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/latex.js/dist/latex.js"></script>
+    <script src="script.js" type="module"></script>
+    <script src="specialCases.js" type="module"></script>
+</body>
+
+</html>

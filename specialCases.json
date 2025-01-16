@@ -1,0 +1,229 @@
+{
+    "title": "Özel Durumlar",
+    "entries": [
+        {
+            "title": "Örnek Dizi",
+            "entries": [
+                {
+                    "descriptions": [
+                        "Girilen Sayı Dizisi",
+                        "Elde Edilen Sayı Dizisi"
+                    ],
+                    "formulas": [
+                        "a_n",
+                        "b_n"
+                    ],
+                    "sequences": [
+                        "1 3 5 7 9",
+                        "1 2 6 12 20"
+                    ]
+                },
+                {
+                    "formulas": [
+                        "c_n=ka_n",
+                        "d_n=b_n^k"
+                    ],
+                    "sequences": [
+                        "2 6 10 14 18",
+                        "1 4 36 144 400"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Aritmetik Diziler",
+            "entries": [
+                {
+                    "formulas": [
+                        "an+b",
+                        "\\sum_{k=0}^{a}\\binom{b+k-1}{k}n^{a-k}"
+                    ]
+                },
+                {
+                    "descriptions": [
+                        "Ritmik Sayılar",
+                        "Kuvvetler"
+                    ],
+                    "formulas": [
+                        "an",
+                        "n^a"
+                    ]
+                },
+                {
+                    "descriptions": [
+                        "2'nin katları",
+                        "Kareler"
+                    ],
+                    "formulas": [
+                        "2n",
+                        "n^2"
+                    ],
+                    "sequences": [
+                        "2 4 6 8 10",
+                        "1 4 9 16 25"
+                    ],
+                    "OEIS": [
+                        "A299174",
+                        "A000290"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "İkinci Derece Polinomlar",
+            "entries": [
+                {
+                    "formulas": [
+                        "an^2+bn+c",
+                        "n^{a+b+c}(n-1)^{-c}(n-1)!^{2a}"
+                    ]
+                },
+                {
+                    "formulas": [
+                        "n^2+bn",
+                        "n^{b-1}n!^2"
+                    ]
+                },
+                {
+                    "formulas": [
+                        "n^2+c",
+                        "n^{c-1}(n-1)^{-c}n!^2"
+                    ]
+                },
+                {
+                    "formulas": [
+                        "n^2+bn+c",
+                        "n^{b+c-1}(n-1)^{-c}n!^2"
+                    ]
+                },
+                {
+                    "note": [
+                        "Elde edilen formül bir tam sayı dizisi üretmiyorsa elde edilen sayı dizisi yaklaşık sonuçlar verecektir."
+                    ]
+                },
+                {
+                    "title": "Çokgensel Sayılar",
+                    "entries": [
+                        {
+                            "formulas": [
+                                "\\frac{(s-2)n^2-(s-4)n}{2}",
+                                "n(n-1)!^{s-2}"
+                            ]
+                        },
+                        {
+                            "descriptions": [
+                                "Üçgensel Sayılar (s=3)",
+                                "Faktöriyeller"
+                            ],
+                            "formulas": [
+                                "\\frac12n(n+1)",
+                                "n!"
+                            ],
+                            "sequences": [
+                                "1 3 6 10 15",
+                                "1 2 6 24 120"
+                            ],
+                            "OEIS": [
+                                "A000217",
+                                "A000142"
+                            ]
+                        },
+                        {
+                            "descriptions": [
+                                "Karesel Sayılar (s=4)",
+                                "Faktöriyel Çarpımları"
+                            ],
+                            "formulas": [
+                                "n^2",
+                                "n!(n-1)!"
+                            ],
+                            "sequences": [
+                                "1 4 9 16 25",
+                                "1 2 12 144 2880"
+                            ],
+                            "OEIS": [
+                                "A000290",
+                                "A010790"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Fibonacci Tarzı Diziler",
+            "entries": [
+                {
+                    "formulas": [
+                        "U_1=1,U_2=m,U_3=m+1,\\dots",
+                        "k_n((n-1)(n-2)^{m-2}+(n-3)^{m-2})"
+                    ]
+                },
+                {
+                    "formulas": [
+                        "k_n = (n-3)\\prod_{i=0}^{n-6}(n-4-i)^{U_{i+1}}"
+                    ]
+                },
+                {
+                    "descriptions": [
+                        "Fibonacci Dizisi (m=2)",
+                        "-"
+                    ],
+                    "formulas": [
+                        "U_n=\\frac{\\varphi^{n+1}-\\psi^{n+1}}{\\sqrt5}",
+                        "A_n=k_nn"
+                    ],
+                    "sequences": [
+                        "1 2 3 5 8 13 21",
+                        "1 2 3 4 10 36 336"
+                    ],
+                    "OEIS": [
+                        "A000045",
+                        "A380023"
+                    ]
+                },
+                {
+                    "descriptions": [
+                        "Lucas Dizisi (m=3)",
+                        "-"
+                    ],
+                    "formulas": [
+                        "U_n=\\varphi^n+\\psi^n",
+                        "A_n=k_n(n^2-2n-1)"
+                    ],
+                    "sequences": [
+                        "1 3 4 7 11 18 29",
+                        "1 2 4 7 28 138 3264"
+                    ],
+                    "OEIS": [
+                        "A000204",
+                        "-"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Diğer",
+            "entries": [
+                {
+                    "descriptions": [
+                        "2'nin Kuvvetleri",
+                        "-"
+                    ],
+                    "formulas": [
+                        "2^{n-1}",
+                        "n\\prod_{k=4}^{n}(k-2)^{2^{n-k}}"
+                    ],
+                    "sequences": [
+                        "1 2 4 8 16 32 64",
+                        "1 2 3 8 60 3456 11612160"
+                    ],
+                    "OEIS": [
+                        "A000079",
+                        "A347289"
+                    ]
+                }
+            ]
+        }
+    ]
+}
