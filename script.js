@@ -4,75 +4,63 @@ const resultDiv = document.querySelector("#result");
 const arrayTable = document.querySelector("#arrayTable");
 const submitButton = document.querySelector("#submit");
 
-const partialSum = array => {
+const partialSums = array => {
     let sum = 0;
-    array.forEach((item, index) => {
-        if (item != "*") {
-            sum += item;
-            array[index] = sum;
-        }
-    });
+    array.forEach(n => { sum += n; });
+    return sum;
 }
+const sums = array => array.map((n, i) => partialSums(array.slice(0, i + 1)));
+const differences = array => array.map((n, i) => array[i] - array[i - 1]).filter(n => n);
 
 const generateArrays = sequence => {
-    const arrays = [];
-    arrays.push(sequence);
-
-    let array = ["*", ...Array(sequence.at(-1)).keys().map(i => i + 1), "*"];
-    arrays.push([...array]);
-
-    array = array.map(item => sequence.includes(item) ? "*" : item);
-    arrays.push([...array]);
-
-    const result = [];
-    sequence.forEach((number, index) => {
-        const prev = sequence[index - 1];
-        if (number == 1) { result.push(number); }
-        if (prev == number - 1) { result.push(number); }
-    });
-    while (!array.every(item => item == "*")) {
-        partialSum(array);
-        arrays.push([...array]);
-
-        array.forEach((item, index) => {
-            if (item != "*") {
-                const prev = array[index - 1];
-                const next = array[index + 1];
-                if (next == "*") {
-                    if (prev == "*") {
-                        result.push(item);
-                    }
-                    array[index] = "*";
-                }
-            }
-        });
-
-        arrays.push([...array]);
+    let triangleSizes = differences([0, ...sequence]);
+    const arrayObjects = [];
+    while (triangleSizes.some(n => n)) {
+        arrayObjects.push({ triangleSizes });
+        triangleSizes = triangleSizes.map(n => n ? n - 1 : n);
     }
+    let array = [...Array(sequence.at(-1)).keys().map(i => i + 1)];
+    let result = [];
+    arrayObjects.forEach(arrayObject => {
+        triangleSizes = arrayObject.triangleSizes;
+        const indexes = sums(triangleSizes);
 
-    arrays.push([...new Set(result)].sort((a, b) => a - b));
-    return arrays;
+        arrayObject.array = array;
+        arrayObject.tableArray = [];
+        indexes.forEach((index, i) => {
+            arrayObject.tableArray = [
+                ...arrayObject.tableArray,
+                ...array.slice([0, ...indexes][i], [0, ...indexes][i + 1]),
+                ...Array(arrayObjects[0].triangleSizes[i] - triangleSizes[i]).fill("*")
+            ];
+        })
+
+        result = [...result, ...triangleSizes.flatMap((n, i) => n == 1 ? array[indexes[i] - 1] : [])]
+
+        array = array.map((n, i) => indexes.includes(i + 1) ? "*" : n);
+        array = sums(array.filter(n => n != "*"));
+    });
+    result.sort((a, b) => a - b);
+    return [sequence, result, arrayObjects];
 }
 
 const createTableBody = arrays => {
     const tableBody = document.createElement("tbody");
-    
+
     const sequence = arrays[0]
-    const result = arrays.at(-1);
-    arrays.forEach((array) => {
-        if (array == sequence) {
-            sequenceDiv.innerText = "Girilen Dizi: " + sequence.join(" ");
-        } else if (array == result) {
-            resultDiv.innerText = "Sonuç: " + result.join(" ");
-        } else {
-            const row = document.createElement("tr");
-            array.forEach(item => {
-                const cell = document.createElement("td");
-                cell.innerText = item;
-                row.appendChild(cell);
-            });
-            tableBody.appendChild(row);
-        }
+    const result = arrays[1];
+    const arrayObjects = arrays[2]
+    sequenceDiv.innerText = "Girilen Dizi: " + sequence.join(" ");
+    resultDiv.innerText = "Sonuç: " + result.join(" ");
+    arrayObjects.forEach(arrayObject => {
+        const tableArray = arrayObject.tableArray;
+        const row = document.createElement("tr");
+        tableArray.forEach(item => {
+            const cell = document.createElement("td");
+            cell.innerText = item;
+            row.appendChild(cell);
+        });
+        tableBody.appendChild(row);
     });
 
     return tableBody;
@@ -85,13 +73,16 @@ const constructTable = (sequence) => {
     arrayTable.scrollIntoView({ "behavior": "smooth" });
 }
 
-submitButton.addEventListener("click", () => {
+const tableEvent = () => {
     const sequence = sequenceInput.value.trim().split(/[ , ]+/).map(i => +i).sort((a, b) => a - b)
     if (sequence.includes(NaN)) {
         alert("Lütfen artarak ilerleyen, pozitif tam sayılardan oluşan ve virgül veya boşluklarla ayrılmış bir sayı dizisi girin!");
-    } else {
-        constructTable(sequence, arrayTable);
-    }
-});
+    } else { constructTable(sequence, arrayTable); }
+}
+
+sequenceInput.addEventListener("keypress", event => {
+    if (event.key === "Enter") { tableEvent(); }
+})
+submitButton.addEventListener("click", () => { tableEvent(); });
 
 export { constructTable };

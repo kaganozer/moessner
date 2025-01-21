@@ -37,6 +37,9 @@
                     "formulas": [
                         "an+b",
                         "\\sum_{k=0}^{a}\\binom{b+k-1}{k}n^{a-k}"
+                    ],
+                    "note": [
+                        "Formül n>1 için geçerlidir."
                     ]
                 },
                 {
@@ -66,6 +69,26 @@
                         "A299174",
                         "A000290"
                     ]
+                },
+                {
+                    "formulas": [
+                        "3n+2",
+                        "n^3+2n^2+3n+4"
+                    ],
+                    "sequences": [
+                        "5 8 11 14 17",
+                        "1 26 58 112 194"
+                    ]
+                },
+                {
+                    "formulas": [
+                        "3n-1",
+                        "n^3-n^2"
+                    ],
+                    "sequences": [
+                        "2 5 8 11 14",
+                        "1 4 18 48 100"
+                    ]
                 }
             ]
         },
@@ -76,6 +99,9 @@
                     "formulas": [
                         "an^2+bn+c",
                         "n^{a+b+c}(n-1)^{-c}(n-1)!^{2a}"
+                    ],
+                    "note": [
+                        "Formül n>1 için geçerlidir."
                     ]
                 },
                 {
@@ -162,6 +188,9 @@
                 {
                     "formulas": [
                         "k_n = (n-3)\\prod_{i=0}^{n-6}(n-4-i)^{U_{i+1}}"
+                    ],
+                    "note": [
+                        "Formül n>5 için geçerlidir. m=2 için özyinelemeli bir formül mevcuttur."
                     ]
                 },
                 {
@@ -180,6 +209,9 @@
                     "OEIS": [
                         "A000045",
                         "A380023"
+                    ],
+                    "note": [
+                        "A(2)=2, A(3)=3, A(n)=A(n-1)*A(n-2)*(1-2/(n-1)(n-2)) (A(1)=1)"
                     ]
                 },
                 {

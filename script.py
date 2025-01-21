@@ -1,48 +1,40 @@
-def partialSum(array: list):
-    summ = 0
-    for index, item in enumerate(array):
-        if item != "*":
-            summ += item
-            array[index] = summ
+sums = lambda array: [sum(array[: i + 1]) for i in range(len(array))]
+differences = lambda array: [array[i] - array[i - 1] for i in range(1, len(array))]
 
 
-def generateArrays(sequence: list):
-    arrays = []
-    arrays.append(sequence)
+def generateArrays(sequence: list[int]) -> list[list[int | dict[str : list[int]]]]:
+    triangleSizes = differences([0] + sequence)
 
-    array = ["*"] + [i + 1 for i in range(sequence[-1])] + ["*"]
-    arrays.append([i for i in array])
+    arrayObjects: list[dict[str : list[int]]] = []
+    while any(triangleSizes):
+        arrayObjects.append({"triangleSizes": triangleSizes})
+        triangleSizes = [n - 1 if n else n for n in triangleSizes]
 
-    array = ["*" if item in sequence else item for item in array]
-    arrays.append([i for i in array])
-
+    array = [i for i in range(1, sequence[-1] + 1)]
     result = []
-    for index, number in enumerate(sequence):
-        prev = sequence[index - 1]
-        if number == 1:
-            result.append(number)
-        if prev == number - 1:
-            result.append(number)
-    while any([item != "*" for item in array]):
-        partialSum(array)
-        arrays.append([i for i in array])
+    for arrayObject in arrayObjects:
+        triangleSizes = arrayObject["triangleSizes"]
+        indexes = sums(triangleSizes)
 
-        for index, item in enumerate(array):
-            if item != "*":
-                prevItem = array[index - 1]
-                nextItem = array[index + 1]
-                if nextItem == "*":
-                    if prevItem == "*":
-                        result.append(item)
-                    array[index] = "*"
+        arrayObject["array"] = array
+        arrayObject["tableArray"] = []
+        for i in range(len(indexes)):
+            arrayObject["tableArray"] += array[
+                ([0] + indexes)[i] : ([0] + indexes)[i + 1]
+            ] + ["*"] * (arrayObjects[0]["triangleSizes"][i] - triangleSizes[i])
 
-        arrays.append([i for i in array])
+        result += [array[indexes[i] - 1] for i, n in enumerate(triangleSizes) if n == 1]
+
+        array = ["*" if i + 1 in indexes else n for i, n in enumerate(array)]
+        array = sums([n for n in array if n != "*"])
     result.sort()
-    arrays.append(result)
-    return arrays
+    return [sequence, result, arrayObjects]
 
 
-sequence = [int(item) for item in input("Input the number sequence seperated by spaces: ").split(" ")]
+sequence = [1, 3, 6, 10, 15]
+# sequence = [int(item) for item in input("Input the number sequence seperated by spaces: ").split(" ")]
+
 arrays = generateArrays(sequence)
-for array in arrays:
-    print(array)
+print(arrays[1])
+for arrayObject in arrays[2]:
+    print(arrayObject["array"])
